@@ -1,0 +1,119 @@
+.why-us-section {
+  padding: 80px 20px 100px;
+  background-color: #fbfcfd;
+}
+
+.why-us-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-us-header {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.why-us-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.why-us-subtitle {
+  font-size: 1.05rem;
+  color: #64748b;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.why-us-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.why-us-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #edf2f7;
+  padding: 42px 30px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.why-us-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(223, 122, 50, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: rgba(223, 122, 50, 0.25);
+}
+
+.why-us-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  color: #df7a32;
+  transition: transform 0.3s ease;
+}
+
+.why-us-card:hover .why-us-icon-wrapper {
+  transform: scale(1.1);
+}
+
+.why-us-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+.why-us-card-desc {
+  font-size: 0.96rem;
+  color: #64748b;
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .why-us-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .why-us-title {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .why-us-section {
+    padding: 60px 16px 70px;
+  }
+
+  .why-us-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .why-us-card {
+    padding: 34px 22px;
+  }
+
+  .why-us-title {
+    font-size: 1.85rem;
+  }
+
+  .why-us-subtitle {
+    font-size: 0.95rem;
+  }
+}

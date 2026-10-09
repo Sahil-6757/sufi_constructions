@@ -16,7 +16,6 @@ const Swiperslide = () => {
                 spaceBetween={30}
                 slidesPerView={1}
                 pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
                 autoplay={{ delay: 4000, disableOnInteraction: false }}
                 loop={true}
                 className="mySwiper"
