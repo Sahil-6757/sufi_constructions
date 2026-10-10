@@ -80,7 +80,7 @@ const Footer = () => {
                 <div className="footer-bottom-bar">
                     <p>© {new Date().getFullYear()} Sufi Construction Pvt. Ltd. All Rights Reserved.</p>
                     <div className="footer-bottom-links">
-                        <span>Developed and Designed by <a href="https://portfolio.blogbeast.in" style={{ color: "#f8f8f8ff", textDecoration: "none" }} target="_blank">Sahil</a></span>
+                        <span>Developed and Designed by <a href="https://portfolio.blogbeast.in" style={{ color: "#f8f8f8ff", textDecoration: "none" }} target="_blank" rel="noopener noreferrer">Sahil</a></span>
                     </div>
                 </div>
             </div>
