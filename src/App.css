@@ -223,6 +223,7 @@
 .expertise-card:hover,
 .impact-card:hover {
   transform: translateY(-6px);
+  background-color: #ddc299;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
 }
 

@@ -64,6 +64,7 @@ const Ourexpertise = () => {
                     modules={[Navigation, Pagination, Autoplay]}
                     spaceBetween={24}
                     slidesPerView={1}
+                    loop={true}
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 3000, disableOnInteraction: false }}
                     breakpoints={{
