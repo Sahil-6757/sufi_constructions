@@ -1,24 +1,26 @@
 import './App.css';
-import Featureproject from './components/Featureproject';
 import Navbar from './components/Navbar';
-import Ourexpertise from './components/Ourexpertise';
-import Ourimpact from './components/Ourimpact';
-import Why from './components/Why';
 import Footer from './components/Footer';
-import Testimonials from './components/Testimonials';
-import Swiper from './components/Swiperslide';
-import FAQs from './components/FAQs';
+import Maincontainer from './components/Maincontainer';
+import { Routes, Route } from "react-router-dom"
+import About from './pages/About';
+import Services from './pages/Services';
+import Project from './pages/Project';
+import Contact from './pages/Contact';
+import Package from './pages/Package';
+
 function App() {
   return (
     <div>
       <Navbar />
-      <Swiper />
-      <Featureproject />
-      <Ourexpertise />
-      <Ourimpact />
-      <Why />
-      <Testimonials />
-      <FAQs />
+      <Routes>
+        <Route path="/" element={<Maincontainer />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Services" element={<Services />} />
+        <Route path="/Project" element={<Project />} />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/Package" element={<Package />} />
+      </Routes>
       <Footer />
     </div>
   );

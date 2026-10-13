@@ -1,0 +1,573 @@
+/* ===================================================
+   Sufi Construction - Services Page Stylesheet
+   Palette derived from site icon & brand identity:
+   - Gold Accent:    #C88A42, #DCA56D, #B87B33, #FFD8AE
+   - Bronze Dark:    #4E320B, #3A2306, #694511
+   - Warm Neutral:   #FAF7F2, #F5EEE4, #EFE5D8
+   - Text Colors:    #3C2E1F, #73614E
+   =================================================== */
+
+:root {
+  --sc-gold-primary: #C88A42;
+  --sc-gold-light: #DCA56D;
+  --sc-gold-hover: #FFD8AE;
+  --sc-bronze-heading: #4E320B;
+  --sc-bronze-deep: #3A2306;
+  --sc-text-main: #3C2E1F;
+  --sc-text-muted: #73614E;
+  --sc-bg-warm: #FAF7F2;
+  --sc-bg-alt: #F5EEE4;
+  --sc-border-warm: #EADBC8;
+  --sc-gold-glow: rgba(200, 138, 66, 0.16);
+}
+
+.services-page-wrapper {
+  background-color: #FFFFFF;
+  color: var(--sc-text-main);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===================================================
+   Services Hero Section
+   =================================================== */
+.services-hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #FBF8F3 0%, #F5EEE4 50%, #EFE5D8 100%);
+  padding: 80px 20px 85px;
+  border-bottom: 1px solid var(--sc-border-warm);
+  overflow: hidden;
+  text-align: center;
+}
+
+.services-hero-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -80px;
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, rgba(220, 165, 109, 0.22) 0%, rgba(220, 165, 109, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.services-hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(200, 138, 66, 0.16) 0%, rgba(200, 138, 66, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.services-hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.services-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  background: rgba(200, 138, 66, 0.12);
+  border: 1px solid rgba(200, 138, 66, 0.32);
+  border-radius: 50px;
+  color: var(--sc-bronze-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(200, 138, 66, 0.08);
+}
+
+.services-badge-icon {
+  color: var(--sc-gold-primary);
+  display: flex;
+  align-items: center;
+}
+
+.services-hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--sc-bronze-heading);
+  line-height: 1.2;
+  margin-bottom: 22px;
+  letter-spacing: -0.5px;
+}
+
+.services-hero-title .text-gold-highlight {
+  color: var(--sc-gold-primary);
+  background: linear-gradient(135deg, #B87B33 0%, #DCA56D 60%, #A86F2C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.services-hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: var(--sc-text-muted);
+  max-width: 760px;
+  margin: 0 auto 34px;
+}
+
+.services-hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ===================================================
+   Capabilities Banner Strip
+   =================================================== */
+.services-trust-strip {
+  position: relative;
+  margin-top: -38px;
+  z-index: 10;
+  padding: 0 20px 30px;
+}
+
+.trust-strip-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 30px rgba(78, 50, 11, 0.08);
+  border: 1px solid var(--sc-border-warm);
+}
+
+.trust-items-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 12px;
+}
+
+.trust-item:not(:last-child) {
+  border-right: 1px solid var(--sc-border-warm);
+}
+
+.trust-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(200, 138, 66, 0.12);
+  color: var(--sc-gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trust-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--sc-bronze-heading);
+  margin: 0 0 2px;
+}
+
+.trust-sub {
+  font-size: 0.8rem;
+  color: var(--sc-text-muted);
+  margin: 0;
+}
+
+/* ===================================================
+   Services Grid Section
+   =================================================== */
+.services-grid-section {
+  padding: 85px 20px;
+  background-color: #FFFFFF;
+}
+
+.services-container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.services-section-header {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 55px;
+}
+
+.services-section-tag {
+  color: var(--sc-gold-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.services-section-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--sc-bronze-heading);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.services-section-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--sc-text-muted);
+  margin: 0;
+}
+
+.services-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--sc-border-warm);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(78, 50, 11, 0.05);
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  background-color: var(--sc-gold-hover) !important;
+  border-color: var(--sc-gold-primary);
+  box-shadow: 0 16px 36px rgba(78, 50, 11, 0.14);
+}
+
+.service-card-image-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background-color: var(--sc-bg-warm);
+}
+
+.service-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.06);
+}
+
+.service-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(58, 35, 6, 0.05) 0%, rgba(58, 35, 6, 0.6) 100%);
+}
+
+.service-category-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--sc-bronze-heading);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.service-card-body {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.service-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.service-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(200, 138, 66, 0.12);
+  color: var(--sc-gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon-circle {
+  background: var(--sc-bronze-heading);
+  color: #FFFFFF;
+}
+
+.service-card-title {
+  font-size: 1.32rem;
+  font-weight: 800;
+  color: var(--sc-bronze-heading);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.service-card-desc {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--sc-text-main);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.service-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  border-top: 1px solid rgba(234, 219, 200, 0.7);
+  padding-top: 16px;
+}
+
+.service-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--sc-bronze-heading);
+}
+
+.service-feature-item svg {
+  color: var(--sc-gold-primary);
+  flex-shrink: 0;
+}
+
+.service-card-action {
+  margin-top: auto;
+}
+
+.service-inquire-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--sc-bronze-heading);
+  text-decoration: none;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.service-inquire-link:hover {
+  color: var(--sc-bronze-deep);
+  gap: 12px;
+}
+
+/* ===================================================
+   Why Choose Us Section
+   =================================================== */
+.why-choose-section {
+  padding: 95px 20px;
+  background-color: var(--sc-bg-warm);
+  border-top: 1px solid var(--sc-border-warm);
+  border-bottom: 1px solid var(--sc-border-warm);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.feature-card {
+  background: #FFFFFF;
+  border: 1px solid var(--sc-border-warm);
+  border-radius: 16px;
+  padding: 30px 24px;
+  transition: all 0.35s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  background-color: var(--sc-gold-hover) !important;
+  border-color: var(--sc-gold-primary);
+  box-shadow: 0 14px 32px rgba(78, 50, 11, 0.1);
+}
+
+.feature-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(200, 138, 66, 0.12);
+  color: var(--sc-gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-wrapper {
+  background: var(--sc-bronze-heading);
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.feature-content h4 {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--sc-bronze-heading);
+  margin-bottom: 8px;
+}
+
+.feature-content p {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--sc-text-muted);
+  margin: 0;
+}
+
+/* ===================================================
+   Service CTA Section
+   =================================================== */
+.services-cta-section {
+  padding: 85px 20px;
+  background: linear-gradient(135deg, #3A2306 0%, #4E320B 50%, #291803 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.services-cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(200, 138, 66, 0.22) 0%, rgba(200, 138, 66, 0) 70%);
+  pointer-events: none;
+}
+
+.services-cta-container {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.services-cta-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(220, 165, 109, 0.16);
+  border: 1px solid rgba(220, 165, 109, 0.4);
+  border-radius: 50px;
+  color: #DCA56D;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.services-cta-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}
+
+.services-cta-desc {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #E6D8C8;
+  max-width: 700px;
+  margin: 0 auto 34px;
+}
+
+.services-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ===================================================
+   Responsive Breakpoints
+   =================================================== */
+@media (max-width: 992px) {
+  .services-hero-title {
+    font-size: 2.6rem;
+  }
+  .trust-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .trust-item:nth-child(2) {
+    border-right: none;
+  }
+  .services-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .services-hero-section {
+    padding: 60px 15px 75px;
+  }
+  .services-hero-title {
+    font-size: 2.1rem;
+  }
+  .trust-items-grid {
+    grid-template-columns: 1fr;
+  }
+  .trust-item {
+    border-right: none !important;
+  }
+  .services-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .services-cta-title {
+    font-size: 2.1rem;
+  }
+}
