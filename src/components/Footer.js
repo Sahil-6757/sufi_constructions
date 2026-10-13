@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/Logo.png';
 import './footer.css';
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <footer className="footer-section">
@@ -53,12 +53,11 @@ const Footer = () => {
                     <div className="footer-links-col">
                         <h4 className="footer-col-title">Quick Links</h4>
                         <ul className="footer-links-list">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#services">Our Services</a></li>
-                            <li><a href="#projects">Recent Projects</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li><a href="#careers">Careers</a></li>
+                            <li><Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/">Home</Link></li>
+                            <li><Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/about">About Us</Link></li>
+                            <li><Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/services">Our Services</Link></li>
+                            <li><Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/project">Recent Projects</Link></li>
+                            <li><Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/contact">Contact</Link></li>
                         </ul>
                     </div>
 
