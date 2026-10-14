@@ -1,23 +1,23 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './contact.css';
 
 import {
-    RiTeamFill,
-    RiBuilding2Fill,
-    RiToolsFill,
-    RiCustomerService2Fill,
     RiMapPinFill,
     RiMailFill,
     RiWhatsappFill,
     RiPhoneFill,
+    RiTimeFill,
     RiFacebookFill,
     RiInstagramFill,
-    RiTwitterFill,
-    RiLinkedinFill
+    RiLinkedinFill,
+    RiYoutubeFill
 } from 'react-icons/ri';
 
 const Contact = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const initialForm = {
         name: '',
         email: '',
@@ -28,76 +28,139 @@ const Contact = () => {
 
     const [formData, setFormData] = useState(initialForm);
     const [submitted, setSubmitted] = useState(false);
+    const [whatsappRedirectUrl, setWhatsappRedirectUrl] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-
-
-
         setFormData((prev) => ({
             ...prev,
             [name]: value
         }));
-
         setSubmitted(false);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Replace this with your API request to send the message.
-        console.log('Contact Form Data:', formData);
+        const whatsappNumber = '919130630632';
 
+        const messageLines = [
+            '🏗️ *New Project Inquiry - Sufi Construction*',
+            '━━━━━━━━━━━━━━━━━━━━━',
+            `👤 *Full Name:* ${formData.name}`,
+            `📧 *Email:* ${formData.email}`,
+            `📱 *Phone:* ${formData.phone || 'Not provided'}`,
+            `🏢 *Interested Service:* ${formData.service}`,
+            `💬 *Message:*`,
+            `${formData.message}`,
+            '━━━━━━━━━━━━━━━━━━━━━',
+            `📅 *Date:* ${new Date().toLocaleDateString('en-IN')}`,
+            '_Sent via Sufi Construction Website_'
+        ];
+
+        const encodedMessage = encodeURIComponent(messageLines.join('\n'));
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        setWhatsappRedirectUrl(whatsappUrl);
         setSubmitted(true);
         setFormData(initialForm);
+
+        // Open WhatsApp in a new tab/window
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     };
 
     return (
-        <>
+        <div className="contact-page-wrapper">
             {/* Hero Section */}
             <section className="contact-hero-section">
                 <div className="contact-hero-content">
-
-                    <h2>Let's Start Your Next Project</h2>
-
-                    <p>
-                        Ready to transform your vision into reality? Whether you have
-                        a specific construction project in mind or need expert guidance,
-                        our team is here to help you every step of the way.
+                    <h1 className="contact-hero-title">Contact Us</h1>
+                    <p className="contact-hero-subtitle">
+                        Ready to transform your vision into reality? Whether you have a specific construction project in mind or need expert guidance, our team is here to help you every step of the way.
                     </p>
                 </div>
             </section>
 
-            {/* Contact Form and Information */}
-            <section className="contact-container">
+            {/* Contact Details Card (from user screenshot) */}
+            <div className="contact-details-container">
+                <h2>Contact Details</h2>
+                <div className="contact-details">
+                    <p className="contact-item">
+                        <i className="fas fa-map-marker-alt">📍</i>
+                        <strong>Address:</strong>
+                        <span className="detail-value">
+                            Plot No. 4, Shahu Nagar, PO Jalgaon, Maharashtra, 425001
+                        </span>
+                    </p>
+                    <p className="contact-item">
+                        <i className="fas fa-phone">📞</i>
+                        <strong>Phone:</strong>
+                        <a href="tel:+919130630632" className="detail-value">
+                            +91 9130630632
+                        </a>
+                    </p>
+                    <p className="contact-item">
+                        <i className="fas fa-envelope">✉️</i>
+                        <strong>Email:</strong>
+                        <a href="mailto:suficonstructionpvtltd@gmail.com" className="detail-value">
+                            suficonstructionpvtltd@gmail.com
+                        </a>
+                    </p>
+                </div>
+            </div>
 
+            {/* Contact Form and Information Grid */}
+            <section className="contact-container">
+                {/* Form Card */}
                 <div className="contact-form-card">
                     <div className="contact-form-header">
                         <h3>Get In Touch</h3>
                         <p>
-                            Send us a message and we'll get back to you shortly.
+                            We'd love to hear from you! Please fill out the form below to send us a message.
                         </p>
                     </div>
 
                     {submitted && (
                         <div className="submit-success" role="status">
-                            ✓ Your form has been submitted successfully.
-                            Please connect an email service or backend to deliver messages.
+                            <div className="submit-success-icon">✓</div>
+                            <div>
+                                <strong>Redirecting to WhatsApp!</strong>
+                                <p>
+                                    Your project details have been formulated into WhatsApp for <strong>+91 91306 30632</strong>.
+                                </p>
+                                {whatsappRedirectUrl && (
+                                    <a
+                                        href={whatsappRedirectUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            display: 'inline-block',
+                                            marginTop: '8px',
+                                            color: '#2B1703',
+                                            background: 'linear-gradient(135deg, #DF9B4E 0%, #C88A42 100%)',
+                                            padding: '8px 16px',
+                                            borderRadius: '8px',
+                                            fontWeight: '700',
+                                            fontSize: '0.9rem',
+                                            textDecoration: 'none',
+                                            boxShadow: '0 4px 12px rgba(200, 138, 66, 0.3)'
+                                        }}
+                                    >
+                                        Click here if WhatsApp didn't open automatically →
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     )}
 
-                    <form
-                        onSubmit={handleSubmit}
-                        className="contact-form"
-                    >
+                    <form onSubmit={handleSubmit} className="contact-form">
                         <div className="form-group">
-                            <label htmlFor="name">Full Name *</label>
+                            <label htmlFor="name">Your Name *</label>
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
-                                placeholder="Enter your full name"
+                                placeholder="Enter Your Name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 autoComplete="name"
@@ -106,12 +169,12 @@ const Contact = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="email">Email Address *</label>
+                            <label htmlFor="email">Your Email *</label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                placeholder="Enter your email"
+                                placeholder="Enter Your Email"
                                 value={formData.email}
                                 onChange={handleChange}
                                 autoComplete="email"
@@ -125,7 +188,7 @@ const Contact = () => {
                                 type="tel"
                                 id="phone"
                                 name="phone"
-                                placeholder="Enter your phone number"
+                                placeholder="Enter your phone number (e.g. +91 91306 30632)"
                                 value={formData.phone}
                                 onChange={handleChange}
                                 autoComplete="tel"
@@ -141,65 +204,49 @@ const Contact = () => {
                                 onChange={handleChange}
                             >
                                 <option value="General">General Inquiry</option>
-                                <option value="Residential">
-                                    Residential Construction
-                                </option>
-                                <option value="Commercial">
-                                    Commercial Construction
-                                </option>
-                                <option value="Renovation">
-                                    Renovation &amp; Remodeling
-                                </option>
-                                <option value="Consultation">
-                                    Consultation
-                                </option>
+                                <option value="Residential">Residential Construction</option>
+                                <option value="Commercial">Commercial Construction</option>
+                                <option value="Renovation">Renovation &amp; Remodeling</option>
+                                <option value="Consultation">Consultation &amp; Architectural Planning</option>
                             </select>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="message">
-                                How can we help you? *
-                            </label>
+                            <label htmlFor="message">Message *</label>
                             <textarea
                                 id="message"
                                 name="message"
                                 placeholder="Describe your project or how we can assist you..."
                                 value={formData.message}
                                 onChange={handleChange}
-                                rows={5}
+                                rows={6}
                                 required
                             />
                         </div>
 
-                        <button
-                            type="submit"
-                            className="contact-submit-btn"
-                        >
-                            Send Message
+                        <button type="submit" className="contact-submit-btn">
+                            <span>Send Message via WhatsApp</span>
+                            <RiWhatsappFill style={{ fontSize: '1.3rem' }} />
                         </button>
                     </form>
                 </div>
 
-                {/* Contact Information Sidebar */}
+                {/* Sidebar Info Card */}
                 <div className="contact-sidebar">
                     <div className="contact-info-card">
-                        <h3>Our Contact Information</h3>
-
+                        <h3>Our Office</h3>
                         <p className="info-description">
-                            Reach out to us through any of the channels below.
-                            Our team is ready to assist you with your construction needs.
+                            Reach out to us through any of the channels below. Our team is ready to assist you with your construction needs.
                         </p>
 
                         <div className="info-item">
                             <div className="info-icon">
-                                <RiMailFill />
+                                <RiMapPinFill />
                             </div>
-
                             <div className="info-content">
-                                <h4>Email Address</h4>
-                                <a href="mailto:your-email@example.com">
-                                    your-email@example.com
-                                </a>
+                                <h4>Head Office</h4>
+                                <p>Plot No. 4, Shahu Nagar,</p>
+                                <p>PO Jalgaon, Maharashtra, 425001, India</p>
                             </div>
                         </div>
 
@@ -207,163 +254,69 @@ const Contact = () => {
                             <div className="info-icon">
                                 <RiPhoneFill />
                             </div>
-
                             <div className="info-content">
-                                <h4>Phone Number</h4>
-                                <a href="tel:+911234567890">
-                                    +91 12345 67890
-                                </a>
-                                <a href="tel:+911234567891">
-                                    +91 12345 67891
-                                </a>
+                                <h4>Direct Phone</h4>
+                                <a href="tel:+919130630632">+91 91306 30632</a>
                             </div>
                         </div>
-
-                        <div className="info-item">
-                            <div className="info-icon">
-                                <RiMapPinFill />
-                            </div>
-
-                            <div className="info-content">
-                                <h4>Office Address</h4>
-                                <p>123 Construction Street</p>
-                                <p>Mumbai, Maharashtra 400001</p>
-                                <p>India</p>
-                            </div>
-                        </div>
-
-                        <div className="info-divider" />
 
                         <div className="info-item">
                             <div className="info-icon">
                                 <RiWhatsappFill />
                             </div>
-
                             <div className="info-content">
-                                <h4>WhatsApp</h4>
-                                <a
-                                    href="https://wa.me/911234567890"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Chat with us
+                                <h4>WhatsApp Support</h4>
+                                <a href="https://wa.me/919130630632" target="_blank" rel="noopener noreferrer">
+                                    +91 91306 30632 (Instant Chat)
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="info-item">
+                            <div className="info-icon">
+                                <RiMailFill />
+                            </div>
+                            <div className="info-content">
+                                <h4>Email</h4>
+                                <a href="mailto:suficonstructionpvtltd@gmail.com">
+                                    suficonstructionpvtltd@gmail.com
                                 </a>
                             </div>
                         </div>
 
                         <div className="info-divider" />
 
-                        <div className="info-social">
-                            <h4>Follow Us</h4>
-
-                            <div className="social-icons">
-                                <a
-                                    href="https://facebook.com/"
-                                    aria-label="Facebook"
-                                    className="social-icon"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <RiFacebookFill />
-                                </a>
-
-                                <a
-                                    href="https://instagram.com/"
-                                    aria-label="Instagram"
-                                    className="social-icon"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <RiInstagramFill />
-                                </a>
-
-                                <a
-                                    href="https://twitter.com/"
-                                    aria-label="Twitter"
-                                    className="social-icon"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <RiTwitterFill />
-                                </a>
-
-                                <a
-                                    href="https://linkedin.com/"
-                                    aria-label="LinkedIn"
-                                    className="social-icon"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <RiLinkedinFill />
-                                </a>
+                        <div className="info-item">
+                            <div className="info-icon">
+                                <RiTimeFill />
+                            </div>
+                            <div className="info-content">
+                                <h4>Working Hours</h4>
+                                <p>Monday – Saturday: 9:00 AM – 7:00 PM</p>
+                                <p>Sunday: By Appointment</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Why Choose Us */}
-            <section className="why-choose-us">
-                <div className="why-choose-header">
-                    <span className="why-choose-badge">
-                        Why Choose Sufi Construction
-                    </span>
-
-                    <h3>Reasons to Partner With Us</h3>
-
-                    <p>
-                        We combine experience, quality workmanship, and reliable
-                        service to bring your construction vision to life.
-                    </p>
-                </div>
-
-                <div className="stats-grid">
-                    <div className="stat-card">
-                        <div className="stat-icon">
-                            <RiTeamFill />
-                        </div>
-
-                        <div className="stat-content">
-                            <div className="stat-number">500+</div>
-                            <div className="stat-label">Happy Clients</div>
-                        </div>
-                    </div>
-
-                    <div className="stat-card">
-                        <div className="stat-icon">
-                            <RiBuilding2Fill />
-                        </div>
-
-                        <div className="stat-content">
-                            <div className="stat-number">200+</div>
-                            <div className="stat-label">Projects Completed</div>
-                        </div>
-                    </div>
-
-                    <div className="stat-card">
-                        <div className="stat-icon">
-                            <RiToolsFill />
-                        </div>
-
-                        <div className="stat-content">
-                            <div className="stat-number">10+</div>
-                            <div className="stat-label">Years of Experience</div>
-                        </div>
-                    </div>
-
-                    <div className="stat-card">
-                        <div className="stat-icon">
-                            <RiCustomerService2Fill />
-                        </div>
-
-                        <div className="stat-content">
-                            <div className="stat-number">24/7</div>
-                            <div className="stat-label">Customer Support</div>
-                        </div>
-                    </div>
+            {/* Visit Us / Map Section */}
+            <section id="location" className="location-section">
+                <h2>Visit Us</h2>
+                <p className="location-intro">
+                    Our office is conveniently located in Jalgaon. Feel free to stop by!
+                </p>
+                <div className="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6402.102914458713!2d75.55709603264332!3d21.013719919913473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd90f8b370332bf%3A0x142a63191c819529!2sSufi%20Construction!5e1!3m2!1sen!2sin!4v1746283694723!5m2!1sen!2sin"
+                        title="Sufi Construction Office Location Jalgaon"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        allowFullScreen=""
+                    />
                 </div>
             </section>
-        </>
+        </div>
     );
 };
 

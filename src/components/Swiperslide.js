@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 
@@ -16,7 +17,7 @@ const Swiperslide = () => {
                 spaceBetween={30}
                 slidesPerView={1}
                 pagination={{ clickable: true }}
-                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                autoplay={{ delay: 4500, disableOnInteraction: false }}
                 loop={true}
                 className="mySwiper"
             >
@@ -24,7 +25,8 @@ const Swiperslide = () => {
                     <div className="slide-content slide-1">
                         <div className="slide-overlay">
                             <h2>Building Dreams With Precision</h2>
-                            <p>Premium construction & architectural engineering solutions.</p>
+                            <p>Premium construction & architectural engineering solutions for modern living.</p>
+                            <Link to="/Project" className="slide-btn">Explore Projects</Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -32,7 +34,8 @@ const Swiperslide = () => {
                     <div className="slide-content slide-2">
                         <div className="slide-overlay">
                             <h2>Modern Architecture & Design</h2>
-                            <p>Crafting sustainable and innovative residential & commercial spaces.</p>
+                            <p>Crafting sustainable, functional, and innovative residential & commercial spaces.</p>
+                            <Link to="/Services" className="slide-btn">Our Services</Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -40,8 +43,8 @@ const Swiperslide = () => {
                     <div className="slide-content slide-3">
                         <div className="slide-overlay">
                             <h2>Quality & Trust In Every Brick</h2>
-                            <p>Excellence in infrastructure, planning, and timely delivery.</p>
-                            <button className="slide-btn">Contact Us</button>
+                            <p>Excellence in civil infrastructure, master planning, and timely project delivery.</p>
+                            <Link to="/Contact" className="slide-btn">Get In Touch</Link>
                         </div>
                     </div>
                 </SwiperSlide>

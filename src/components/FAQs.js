@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './faqs.css';
 
 const faqsData = [
@@ -123,7 +124,7 @@ const FAQs = () => {
                         <h3>Still have questions about your construction project?</h3>
                         <p>Our senior civil engineers and architects are here to guide you with a free consultation.</p>
                     </div>
-                    <a href="#contact" className="faqs-cta-btn">
+                    <Link to="/Contact" className="faqs-cta-btn">
                         <span>Speak with an Engineer</span>
                         <svg
                             width="16"
@@ -138,7 +139,7 @@ const FAQs = () => {
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                             <polyline points="12 5 19 12 12 19"></polyline>
                         </svg>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>

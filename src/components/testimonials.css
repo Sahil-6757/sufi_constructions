@@ -1,6 +1,6 @@
 .testimonials-section {
   padding: 80px 20px 100px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #FAF7F2 100%);
   overflow: hidden;
 }
 
@@ -16,9 +16,10 @@
 
 .testimonials-badge {
   display: inline-block;
-  padding: 6px 16px;
-  background-color: rgba(22, 163, 74, 0.1);
-  color: #16a34a;
+  padding: 6px 18px;
+  background-color: rgba(200, 138, 66, 0.12);
+  color: #C88A42;
+  border: 1px solid rgba(200, 138, 66, 0.25);
   border-radius: 50px;
   font-size: 0.85rem;
   font-weight: 700;
@@ -30,14 +31,14 @@
 .testimonials-title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #4E320B;
   letter-spacing: -0.5px;
   margin-bottom: 12px;
 }
 
 .testimonials-subtitle {
   font-size: 1.05rem;
-  color: #64748b;
+  color: #73614E;
   max-width: 650px;
   margin: 0 auto;
   line-height: 1.6;
@@ -62,25 +63,25 @@
   background: #ffffff;
   border-radius: 20px;
   padding: 36px 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  border: 1px solid #edf2f7;
+  box-shadow: 0 10px 30px rgba(78, 50, 11, 0.05);
+  border: 1px solid #EADBC8;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .testimonials-swiper .swiper-slide-active .testimonial-card {
-  box-shadow: 0 18px 40px rgba(22, 163, 74, 0.12), 0 6px 16px rgba(0, 0, 0, 0.04);
-  border-color: rgba(22, 163, 74, 0.3);
+  box-shadow: 0 18px 40px rgba(200, 138, 66, 0.16), 0 6px 16px rgba(78, 50, 11, 0.04);
+  border-color: #C88A42;
 }
 
 .testimonial-quote-icon {
   position: absolute;
   top: 24px;
   right: 28px;
-  color: rgba(22, 163, 74, 0.15);
+  color: rgba(200, 138, 66, 0.2);
   font-size: 4rem;
   line-height: 1;
   font-family: Georgia, serif;
@@ -92,14 +93,14 @@
   display: flex;
   gap: 4px;
   margin-bottom: 18px;
-  color: #f59e0b;
+  color: #DF9B4E;
   font-size: 1.15rem;
 }
 
 .testimonial-text {
   font-size: 1rem;
   line-height: 1.7;
-  color: #334155;
+  color: #3C2E1F;
   margin-bottom: 24px;
   font-style: italic;
   position: relative;
@@ -112,7 +113,7 @@
   gap: 16px;
   margin-top: auto;
   padding-top: 18px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #F5EEE4;
 }
 
 .testimonial-avatar {
@@ -120,8 +121,8 @@
   height: 54px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #16a34a;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #C88A42;
+  box-shadow: 0 4px 10px rgba(78, 50, 11, 0.12);
 }
 
 .testimonial-user-info {
@@ -132,13 +133,13 @@
 .testimonial-name {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #4E320B;
   margin-bottom: 2px;
 }
 
 .testimonial-role {
   font-size: 0.85rem;
-  color: #64748b;
+  color: #73614E;
   font-weight: 500;
 }
 
@@ -146,17 +147,18 @@
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.08);
-  padding: 2px 8px;
-  border-radius: 4px;
+  color: #4E320B;
+  background: rgba(200, 138, 66, 0.14);
+  padding: 3px 10px;
+  border-radius: 6px;
   margin-top: 4px;
   width: fit-content;
+  border: 1px solid rgba(200, 138, 66, 0.2);
 }
 
 /* Pagination styles */
 .testimonials-swiper .swiper-pagination-bullet {
-  background: #cbd5e1;
+  background: #D9C5B2;
   opacity: 0.7;
   width: 10px;
   height: 10px;
@@ -164,7 +166,7 @@
 }
 
 .testimonials-swiper .swiper-pagination-bullet-active {
-  background: #16a34a;
+  background: #C88A42;
   opacity: 1;
   width: 28px;
   border-radius: 5px;

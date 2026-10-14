@@ -1,0 +1,122 @@
+/* ===================================================
+   Floating WhatsApp Button - Left Corner
+   =================================================== */
+
+.floating-whatsapp-container {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.floating-whatsapp-btn {
+  width: 58px;
+  height: 58px;
+  background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.42), 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+/* Subtle glowing pulse ring */
+.floating-whatsapp-btn::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  animation: whatsappPulse 2.2s infinite ease-out;
+  opacity: 0;
+}
+
+@keyframes whatsappPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  65% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.floating-whatsapp-container:hover .floating-whatsapp-btn {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.58), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.floating-whatsapp-icon {
+  width: 32px;
+  height: 32px;
+  fill: #ffffff;
+  transition: transform 0.25s ease;
+}
+
+.floating-whatsapp-container:hover .floating-whatsapp-icon {
+  transform: scale(1.05);
+}
+
+/* Tooltip badge on hover */
+.floating-whatsapp-tooltip {
+  background: #241709;
+  color: #FFFDF9;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid #EADBC8;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.floating-whatsapp-container:hover .floating-whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .floating-whatsapp-container {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .floating-whatsapp-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .floating-whatsapp-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .floating-whatsapp-tooltip {
+    display: none;
+  }
+}

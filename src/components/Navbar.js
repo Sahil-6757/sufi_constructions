@@ -4,33 +4,34 @@ import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
     const location = useLocation();
+    const isActive = (path) => location.pathname.toLowerCase() === path.toLowerCase();
 
     return (
         <nav className='navbar'>
-            <div className='logo' >
-                <Link to="/">
-                    <img src={logo} alt="logo" className='logo-img' />
+            <div className='logo'>
+                <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    <img src={logo} alt="Sufi Construction Logo" className='logo-img' />
                 </Link>
             </div>
             <div className='nav-links'>
                 <ul className='flex'>
-                    <li className={location.pathname === '/' ? 'text-primary' : ''}>
+                    <li className={isActive('/') ? 'text-primary' : ''}>
                         <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Home</Link>
                     </li>
-                    <li className={location.pathname === '/About' ? 'text-primary' : ''}>
+                    <li className={isActive('/About') ? 'text-primary' : ''}>
                         <Link to="/About" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>About</Link>
                     </li>
-                    <li className={location.pathname === '/Services' ? 'text-primary' : ''}>
+                    <li className={isActive('/Services') ? 'text-primary' : ''}>
                         <Link to="/Services" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Services</Link>
                     </li>
-                    <li className={location.pathname === '/Project' ? 'text-primary' : ''}>
-                        <Link to="/Project" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Project</Link>
+                    <li className={isActive('/Project') ? 'text-primary' : ''}>
+                        <Link to="/Project" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Projects</Link>
                     </li>
-                    <li className={location.pathname === '/Contact' ? 'text-primary' : ''}>
+                    <li className={isActive('/Package') ? 'text-primary' : ''}>
+                        <Link to="/Package" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Packages</Link>
+                    </li>
+                    <li className={isActive('/Contact') ? 'text-primary' : ''}>
                         <Link to="/Contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Contact</Link>
-                    </li>
-                    <li className={location.pathname === '/Package' ? 'text-primary' : ''}>
-                        <Link to="/Package" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='nav-link'>Package</Link>
                     </li>
                 </ul>
             </div>
@@ -39,4 +40,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

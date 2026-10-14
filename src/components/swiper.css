@@ -10,7 +10,8 @@
   height: 480px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 35px rgba(78, 50, 11, 0.16);
+  border: 1px solid #EADBC8;
 }
 
 .slide-content {
@@ -24,78 +25,85 @@
   justify-content: center;
 }
 
+/* Gradients crafted with rich architectural bronze & warm gold tones matching the site icon */
 .slide-1 {
-  background: linear-gradient(135deg, rgba(20, 83, 45, 0.85), rgba(15, 23, 42, 0.8)),
+  background: linear-gradient(135deg, rgba(58, 35, 6, 0.88), rgba(20, 14, 6, 0.82)),
     url('https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
 }
 
 .slide-2 {
-  background: linear-gradient(135deg, rgba(22, 101, 52, 0.85), rgba(30, 41, 59, 0.8)),
+  background: linear-gradient(135deg, rgba(78, 50, 11, 0.86), rgba(28, 19, 8, 0.82)),
     url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
 }
 
 .slide-3 {
-  background: linear-gradient(135deg, rgba(21, 128, 61, 0.85), rgba(15, 23, 42, 0.8)),
+  background: linear-gradient(135deg, rgba(105, 69, 17, 0.86), rgba(24, 16, 7, 0.82)),
     url('https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
 }
 
 .slide-overlay {
   text-align: center;
   color: #ffffff;
-  padding: 30px 40px;
-  max-width: 750px;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 34px 44px;
+  max-width: 760px;
+  background: rgba(30, 20, 10, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 14px;
+  border: 1px solid rgba(220, 165, 109, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.8s ease-in-out;
 }
 
 .slide-overlay h2 {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font-size: 2.5rem;
+  font-weight: 800;
   margin-bottom: 14px;
   letter-spacing: -0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  color: #FFFDF9;
 }
 
 .slide-overlay p {
   font-size: 1.15rem;
   line-height: 1.6;
   opacity: 0.95;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: #F7EEE3;
 }
 
 .slide-btn {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 12px 30px;
   font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #16a34a;
+  font-weight: 700;
+  color: #291803;
+  background: linear-gradient(135deg, #DF9B4E 0%, #C88A42 100%);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
+  box-shadow: 0 4px 16px rgba(200, 138, 66, 0.45);
+  text-decoration: none;
 }
 
 .slide-btn:hover {
-  background-color: #15803d;
+  background: linear-gradient(135deg, #F0B36E 0%, #DF9B4E 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.5);
+  box-shadow: 0 6px 20px rgba(200, 138, 66, 0.55);
+  color: #291803;
 }
 
 /* Swiper custom controls */
 .mySwiper .swiper-button-next,
 .mySwiper .swiper-button-prev {
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(46, 30, 12, 0.6);
   width: 44px;
   height: 44px;
   border-radius: 50%;
   backdrop-filter: blur(4px);
+  border: 1px solid rgba(220, 165, 109, 0.3);
   transition: all 0.25s ease;
 }
 
@@ -107,7 +115,9 @@
 
 .mySwiper .swiper-button-next:hover,
 .mySwiper .swiper-button-prev:hover {
-  background: #16a34a;
+  background: #C88A42;
+  color: #ffffff;
+  border-color: #C88A42;
   transform: scale(1.1);
 }
 
@@ -120,7 +130,7 @@
 }
 
 .mySwiper .swiper-pagination-bullet-active {
-  background: #16a34a;
+  background: #C88A42;
   opacity: 1;
   width: 26px;
   border-radius: 5px;
@@ -131,7 +141,7 @@
 }
 
 .mySwiper .swiper-scrollbar-drag {
-  background: #16a34a;
+  background: #C88A42;
 }
 
 @keyframes fadeIn {
@@ -151,12 +161,12 @@
   }
 
   .slide-overlay {
-    padding: 20px;
+    padding: 22px;
     margin: 0 15px;
   }
 
   .slide-overlay h2 {
-    font-size: 1.6rem;
+    font-size: 1.65rem;
   }
 
   .slide-overlay p {

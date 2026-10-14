@@ -1,13 +1,85 @@
+/* ===================================================
+   Sufi Construction - Global Design System & Variables
+   Palette derived strictly from site icon & logo:
+   - Primary Gold:    #C88A42 (Icon gradient main)
+   - Light Gold:      #DCA56D (Icon highlight)
+   - Dark Gold:       #A86F2C (Accent shadow)
+   - Bronze Heading:  #4E320B (Logo typography)
+   - Deep Bronze:     #3A2306 (Deep dark bronze)
+   - Warm Dark Text:  #3C2E1F (Readable primary text)
+   - Warm Muted Text: #73614E (Secondary text)
+   - Warm Neutral Bg: #FAF7F2 (Light background)
+   - Warm Alt Bg:     #F5EEE4 (Card & subtle section background)
+   - Warm Border:     #EADBC8 (Borders & dividers)
+   =================================================== */
+
+:root {
+  --sc-gold-primary: #C88A42;
+  --sc-gold-light: #DCA56D;
+  --sc-gold-dark: #A86F2C;
+  --sc-gold-hover: #DF9B4E;
+  --sc-bronze-heading: #4E320B;
+  --sc-bronze-deep: #3A2306;
+  --sc-text-main: #3C2E1F;
+  --sc-text-muted: #73614E;
+  --sc-bg-warm: #FAF7F2;
+  --sc-bg-alt: #F5EEE4;
+  --sc-border-warm: #EADBC8;
+  --sc-gold-glow: rgba(200, 138, 66, 0.2);
+  --sc-gold-subtle: rgba(200, 138, 66, 0.08);
+
+  /* Bootstrap 5 Theme Overrides */
+  --bs-primary: #C88A42;
+  --bs-primary-rgb: 200, 138, 66;
+  --bs-link-color: #C88A42;
+  --bs-link-hover-color: #A86F2C;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--sc-text-main);
+  background-color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+  background-color: #F0D5B5;
+  color: #3A2306;
+}
+
+/* Global Bootstrap Primary Overrides */
+.text-primary {
+  color: var(--sc-gold-primary) !important;
+}
+
+.bg-primary {
+  background-color: var(--sc-gold-primary) !important;
+}
+
+.border-primary {
+  border-color: var(--sc-gold-primary) !important;
+}
+
+.btn-primary {
+  background-color: var(--sc-gold-primary) !important;
+  border-color: var(--sc-gold-primary) !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--sc-gold-dark) !important;
+  border-color: var(--sc-gold-dark) !important;
+  color: #ffffff !important;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

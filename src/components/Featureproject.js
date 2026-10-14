@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
@@ -62,9 +63,9 @@ const Featureproject = () => {
                                 <div className="card-body">
                                     <h4 className="card-title">{project.title}</h4>
                                     <p className="card-text">{project.description}</p>
-                                    <a href="#contact" className="btn-solid theme-primary">
+                                    <Link to="/Project" className="btn-solid theme-primary">
                                         View Details
-                                    </a>
+                                    </Link>
                                 </div>
                             </section>
                         </SwiperSlide>
