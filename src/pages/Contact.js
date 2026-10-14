@@ -32,6 +32,9 @@ const Contact = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
+
+
+
         setFormData((prev) => ({
             ...prev,
             [name]: value
@@ -55,7 +58,6 @@ const Contact = () => {
             {/* Hero Section */}
             <section className="contact-hero-section">
                 <div className="contact-hero-content">
-                    <span>Contact Us</span>
 
                     <h2>Let's Start Your Next Project</h2>
 
