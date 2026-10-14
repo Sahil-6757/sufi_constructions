@@ -81,33 +81,7 @@ const Contact = () => {
                 </div>
             </section>
 
-            {/* Contact Details Card (from user screenshot) */}
-            <div className="contact-details-container">
-                <h2>Contact Details</h2>
-                <div className="contact-details">
-                    <p className="contact-item">
-                        <i className="fas fa-map-marker-alt">📍</i>
-                        <strong>Address:</strong>
-                        <span className="detail-value">
-                            Plot No. 4, Shahu Nagar, PO Jalgaon, Maharashtra, 425001
-                        </span>
-                    </p>
-                    <p className="contact-item">
-                        <i className="fas fa-phone">📞</i>
-                        <strong>Phone:</strong>
-                        <a href="tel:+919130630632" className="detail-value">
-                            +91 9130630632
-                        </a>
-                    </p>
-                    <p className="contact-item">
-                        <i className="fas fa-envelope">✉️</i>
-                        <strong>Email:</strong>
-                        <a href="mailto:suficonstructionpvtltd@gmail.com" className="detail-value">
-                            suficonstructionpvtltd@gmail.com
-                        </a>
-                    </p>
-                </div>
-            </div>
+
 
             {/* Contact Form and Information Grid */}
             <section className="contact-container">
