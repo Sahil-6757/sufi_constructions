@@ -7,10 +7,6 @@ import {
     RiWhatsappFill,
     RiPhoneFill,
     RiTimeFill,
-    RiFacebookFill,
-    RiInstagramFill,
-    RiLinkedinFill,
-    RiYoutubeFill
 } from 'react-icons/ri';
 
 const Contact = () => {

@@ -6,8 +6,7 @@ import {
     RiCloseLine,
     RiMapPin2Line,
     RiArrowRightLine,
-    RiCheckboxCircleLine,
-    RiBuilding2Line
+    RiCheckboxCircleLine
 } from 'react-icons/ri';
 
 const projectsData = [
