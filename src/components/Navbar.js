@@ -20,6 +20,7 @@ const Navbar = () => {
     // Close menu and scroll smoothly to top
     const handleNavClick = () => {
         setIsMenuOpen(false);
+        navigator.vibrate(10)
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
