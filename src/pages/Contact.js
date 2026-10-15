@@ -38,6 +38,11 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (formData.name === '' || formData.email === '' || formData.phone === '' || formData.message === '') {
+            navigator.vibrate(30)
+            return;
+        }
+
         const whatsappNumber = '919130630632';
 
         const messageLines = [
