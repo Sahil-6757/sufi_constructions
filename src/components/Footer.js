@@ -17,7 +17,7 @@ const Footer = () => {
                         </p>
                         <p style={{ fontSize: '0.88rem', color: '#D6CBC1', marginBottom: '20px', lineHeight: '1.6' }}>
                             Plot No. 4, Shahu Nagar, PO Jalgaon, Maharashtra, 425001<br />
-                            <a href="tel:+919130630632" style={{ color: '#DF9B4E', textDecoration: 'none', fontWeight: '600' }}>+91 91306 30632</a>  <a href="mailto:suficonstructionpvtltd@gmail.com" style={{ color: '#DF9B4E', textDecoration: 'none', fontWeight: '600' }}>suficonstructionpvtltd@gmail.com</a>
+                            <a href="tel:+919130630632" style={{ color: '#DF9B4E', textDecoration: 'none', fontWeight: '600' }}>+91 91306 30632</a>  <a href="mailto:suficonstructionpvtltd@gmail.com" rel="noopener noreferrer" style={{ color: '#DF9B4E', textDecoration: 'none', fontWeight: '600' }}>suficonstructionpvtltd@gmail.com</a>
                         </p>
                         <div className="footer-social-links">
                             {/* Facebook */}
