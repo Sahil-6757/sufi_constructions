@@ -230,7 +230,7 @@ const Contact = () => {
                             </div>
                             <div className="info-content">
                                 <h4>Direct Phone</h4>
-                                <a href="tel:+919130630632">+91 91306 30632</a>
+                                <a href="tel:+919130630632" rel="noopener noreferrer">+91 91306 30632</a>
                             </div>
                         </div>
 
@@ -252,7 +252,7 @@ const Contact = () => {
                             </div>
                             <div className="info-content">
                                 <h4>Email</h4>
-                                <a href="mailto:suficonstructionpvtltd@gmail.com">
+                                <a href="mailto:suficonstructionpvtltd@gmail.com" rel="noopener noreferrer">
                                     suficonstructionpvtltd@gmail.com
                                 </a>
                             </div>
