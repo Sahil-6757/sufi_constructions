@@ -1,0 +1,499 @@
+/* ===================================================
+   Sufi Construction - Responsive Navbar Design System
+   =================================================== */
+
+.navbar-wrapper {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #EADBC8;
+  box-shadow: 0 4px 20px rgba(78, 50, 11, 0.05);
+  transition: all 0.3s ease;
+}
+
+.navbar-wrapper.scrolled {
+  box-shadow: 0 6px 24px rgba(78, 50, 11, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.navbar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px !important;
+  height: 84px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 20px;
+  transition: height 0.3s ease;
+}
+
+/* ---------------------------------------------------
+   Logo Section
+   --------------------------------------------------- */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar-logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.navbar-logo:hover .navbar-logo-img {
+  transform: scale(1.02);
+}
+
+/* ---------------------------------------------------
+   Desktop Navigation Links
+   --------------------------------------------------- */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.desktop-nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.desktop-nav-item {
+  position: relative;
+}
+
+.desktop-nav-link {
+  color: #4E320B;
+  font-size: 15.5px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 4px;
+  display: inline-block;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.desktop-nav-link:hover {
+  color: #C88A42;
+}
+
+.desktop-nav-item.active .desktop-nav-link {
+  color: #C88A42;
+  font-weight: 700;
+}
+
+.desktop-nav-item.active .desktop-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: linear-gradient(90deg, #DF9B4E 0%, #C88A42 100%);
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------
+   Desktop CTA Button
+   --------------------------------------------------- */
+.navbar-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #DF9B4E 0%, #C88A42 100%);
+  color: #2B1703 !important;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(200, 138, 66, 0.28);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.navbar-cta-btn:hover {
+  background: linear-gradient(135deg, #F0B36E 0%, #DF9B4E 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 138, 66, 0.4);
+  color: #2B1703 !important;
+}
+
+/* ---------------------------------------------------
+   Mobile Hamburger Toggle Button
+   --------------------------------------------------- */
+.mobile-toggle-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: #FAF7F2;
+  border: 1px solid #EADBC8;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+  z-index: 1001;
+}
+
+.mobile-toggle-btn:hover {
+  background: #F3EBDD;
+  border-color: #C88A42;
+}
+
+.mobile-toggle-btn:focus-visible {
+  outline: 2px solid #C88A42;
+  outline-offset: 2px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2.2px;
+  background-color: #4E320B;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* Animated Hamburger to X */
+.mobile-toggle-btn.open .hamburger-line:nth-child(1) {
+  transform: translateY(7.2px) rotate(45deg);
+  background-color: #C88A42;
+}
+
+.mobile-toggle-btn.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-toggle-btn.open .hamburger-line:nth-child(3) {
+  transform: translateY(-7.2px) rotate(-45deg);
+  background-color: #C88A42;
+}
+
+/* ---------------------------------------------------
+   Mobile Backdrop Overlay
+   --------------------------------------------------- */
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: rgba(30, 17, 4, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 100000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-nav-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ---------------------------------------------------
+   Mobile Drawer Sheet
+   --------------------------------------------------- */
+.mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 86%;
+  max-width: 360px;
+  height: 100vh;
+  height: 100dvh;
+  background: #FFFFFF;
+  z-index: 100001;
+  box-shadow: -10px 0 36px rgba(43, 23, 3, 0.22);
+  transform: translateX(100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-drawer.active {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-drawer-header {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #EADBC8;
+  background: #FAF7F2;
+  flex-shrink: 0;
+}
+
+.mobile-drawer-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mobile-drawer-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid #EADBC8;
+  background: #FFFFFF;
+  color: #4E320B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.35rem;
+  transition: all 0.2s ease;
+}
+
+.mobile-drawer-close:hover {
+  background: #C88A42;
+  color: #FFFFFF;
+  border-color: #C88A42;
+}
+
+.mobile-drawer-body {
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  color: #4E320B;
+  text-decoration: none;
+  font-size: 1.02rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.22s ease;
+  border: 1px solid transparent;
+}
+
+.mobile-nav-link:hover {
+  background-color: #FAF7F2;
+  color: #C88A42;
+  border-color: #EADBC8;
+  transform: translateX(3px);
+}
+
+.mobile-nav-link.active {
+  background: linear-gradient(90deg, rgba(200, 138, 66, 0.12) 0%, rgba(200, 138, 66, 0.04) 100%);
+  color: #C88A42;
+  font-weight: 700;
+  border-left: 4px solid #C88A42;
+}
+
+.mobile-nav-link-chevron {
+  color: #A89582;
+  font-size: 1.15rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav-link:hover .mobile-nav-link-chevron,
+.mobile-nav-link.active .mobile-nav-link-chevron {
+  color: #C88A42;
+  transform: translateX(2px);
+}
+
+/* ---------------------------------------------------
+   Mobile Drawer Footer / Quick Contact
+   --------------------------------------------------- */
+.mobile-drawer-footer {
+  margin-top: auto;
+  padding: 18px 18px 22px;
+  border-top: 1px solid #EADBC8;
+  background: #FAF7F2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.mobile-quick-call {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid #EADBC8;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.mobile-quick-call:hover {
+  border-color: #C88A42;
+  background: #FFFBF6;
+}
+
+.mobile-quick-call-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(200, 138, 66, 0.14);
+  color: #C88A42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.mobile-quick-call-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-quick-call-label {
+  font-size: 0.76rem;
+  color: #73614E;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.mobile-quick-call-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4E320B;
+}
+
+.mobile-drawer-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #DF9B4E 0%, #C88A42 100%);
+  color: #2B1703 !important;
+  font-weight: 700;
+  font-size: 0.96rem;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(200, 138, 66, 0.28);
+  transition: all 0.25s ease;
+}
+
+.mobile-drawer-btn:hover {
+  background: linear-gradient(135deg, #F0B36E 0%, #DF9B4E 100%);
+  color: #2B1703 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(200, 138, 66, 0.4);
+}
+
+.mobile-location-tag {
+  font-size: 0.8rem;
+  color: #8C7866;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+/* ---------------------------------------------------
+   Responsive Breakpoints
+   --------------------------------------------------- */
+@media (max-width: 1080px) {
+  .desktop-nav-list {
+    gap: 20px;
+  }
+  .desktop-nav-link {
+    font-size: 14.5px;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-container {
+    height: 72px;
+    padding: 0 18px !important;
+  }
+
+  .navbar-logo-img {
+    height: 48px;
+  }
+
+  .desktop-nav,
+  .navbar-cta-group {
+    display: none !important;
+  }
+
+  .mobile-toggle-btn {
+    display: flex;
+  }
+
+  .mobile-nav-backdrop {
+    display: block;
+  }
+
+  .mobile-drawer {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    height: 66px;
+    padding: 0 16px !important;
+  }
+
+  .navbar-logo-img {
+    height: 42px;
+  }
+
+  .mobile-drawer {
+    width: 86%;
+    max-width: 320px;
+  }
+
+  .mobile-nav-link {
+    padding: 12px 14px;
+    font-size: 0.98rem;
+  }
+}

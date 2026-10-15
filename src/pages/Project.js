@@ -296,7 +296,7 @@ const Project = () => {
             <section className="project-hero-section">
                 <div className="project-hero-content">
                     <span className="project-badge">
-                        <RiBuilding2Line /> Portfolio &amp; Landmarks
+                        Portfolio &amp; Landmarks
                     </span>
 
                     <h1 className="project-hero-title">
