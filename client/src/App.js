@@ -9,6 +9,7 @@ import Services from './pages/Services';
 import Project from './pages/Project';
 import Contact from './pages/Contact';
 import Package from './pages/Package';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/Package" element={<Package />} />
         <Route path="/package" element={<Package />} />
+        <Route path="/admin-login" element={<Login />} />
       </Routes>
       <Footer />
       <FloatingWhatsApp />

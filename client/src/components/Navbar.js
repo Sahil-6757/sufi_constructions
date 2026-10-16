@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import logo from "../assets/Logo.png";
 import { Link, useLocation } from "react-router-dom";
 import './navbar.css';
-import { RiCloseLine, RiPhoneFill, RiArrowRightSLine, RiMapPin2Line } from "react-icons/ri";
+import { IoMdLogIn } from "react-icons/io";
+import { RiCloseLine, RiArrowRightSLine, RiMapPin2Line, RiPhoneFill } from "react-icons/ri";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -115,6 +116,12 @@ const Navbar = () => {
                     <div className="navbar-cta-group">
                         <Link to="/Contact" onClick={handleNavClick} className="navbar-cta-btn">
                             <span>Enquire Now</span>
+                        </Link>
+
+                        <Link to="/admin-login" onClick={handleNavClick} className="navbar-cta-btn">
+                            <span>
+                                <IoMdLogIn style={{ fontSize: "1.6rem", color: "var(--primary-900)" }} />
+                            </span>
                         </Link>
                     </div>
 
