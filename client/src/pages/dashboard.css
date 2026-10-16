@@ -1,0 +1,19 @@
+.left-navbar ul li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.left-navbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.left-navbar ul li:hover {
+    background-color: #d1d1d1;
+    cursor: pointer;
+}
