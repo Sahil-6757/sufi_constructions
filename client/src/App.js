@@ -10,6 +10,7 @@ import Project from './pages/Project';
 import Contact from './pages/Contact';
 import Package from './pages/Package';
 import Login from './components/Login';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/Package" element={<Package />} />
         <Route path="/package" element={<Package />} />
         <Route path="/admin-login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
       <FloatingWhatsApp />

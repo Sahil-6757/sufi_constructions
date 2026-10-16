@@ -15,12 +15,19 @@ const Login = () => {
             alert("Please enter your username and password");
             return;
         }
-        axios.post("http://localhost:5000/auth/login", user).then((res) => {
-            console.log(res.data);
-            // navigate("/dashboard");
-        }).catch((err) => {
-            console.log(err);
-        });
+        axios.post("http://localhost:5000/auth/login", user)
+            .then((res) => {
+                console.log("Login response:", res.data);
+                if (res.data.success) {
+                    alert("Login successful!");
+                    navigate("/dashboard");
+                }
+            })
+            .catch((err) => {
+                console.error("Login error:", err);
+                const errorMessage = err.response?.data?.message || "Login failed. Please check your credentials.";
+                alert(errorMessage);
+            });
     };
     return (
         <div className="container">
