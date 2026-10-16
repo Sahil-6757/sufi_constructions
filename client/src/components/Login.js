@@ -1,11 +1,40 @@
 import './login.css';
+import logo from '../assets/Logo.png';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 const Login = () => {
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        username: '',
+        password: ''
+    });
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (!user.username || !user.password) {
+            alert("Please enter your username and password");
+            return;
+        }
+        axios.post("http://localhost:5000/auth/login", user).then((res) => {
+            console.log(res.data);
+            // navigate("/dashboard");
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
     return (
         <div className="container">
-            <div className="form-container">
-                <input type="text" placeholder="Username" className="form-input" />
-                <input type="password" placeholder="Password" className="form-input" />
-                <button className="form-button">Login</button>
+            <div className="login-container">
+                <img src={logo} alt='logo' height={200} width={200} />
+                <form className="login-form" onSubmit={handleLogin}>
+                    <div className="input-group">
+                        <input type="text" placeholder="Username" value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} className="login-input" />
+                    </div>
+                    <div className="input-group">
+                        <input type="password" placeholder="Password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} className="login-input" />
+                    </div>
+                    <button type="submit" className="login-button">Login</button>
+                </form>
             </div>
         </div>
     );
