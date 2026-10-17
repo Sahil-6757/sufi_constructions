@@ -5,7 +5,7 @@ import Logo from '../assets/Logo.png';
 const Dashboard = () => {
     return (
         <div>
-            <section>
+            <section className='dashboard-container'>
                 <div className='left-navbar'>
                     <ul>
                         <li>
@@ -18,6 +18,19 @@ const Dashboard = () => {
                         <li>Profile</li>
                         <li>Logout</li>
                     </ul>
+                </div>
+                <div className='right-panel'>
+                    <div className='right-panel-header'>
+                        <div className='manageProjects'>
+                            <p>Manage Projects</p>
+                        </div>
+                        <div className='viewProjects'>
+                            <p>View Projects</p>
+                            <div className='projectList'>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

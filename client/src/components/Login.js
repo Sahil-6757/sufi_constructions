@@ -3,6 +3,9 @@ import logo from '../assets/Logo.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
+
+const API_URL = process.env.REACT_APP_API_URL || process.env.API_URL || 'http://localhost:5000';
+
 const Login = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -15,7 +18,7 @@ const Login = () => {
             alert("Please enter your username and password");
             return;
         }
-        axios.post("http://localhost:5000/auth/login", user)
+        axios.post(`${API_URL}/auth/login`, user)
             .then((res) => {
                 console.log("Login response:", res.data);
                 if (res.data.success) {

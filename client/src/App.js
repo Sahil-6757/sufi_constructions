@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Maincontainer from './components/Maincontainer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import About from './pages/About';
 import Services from './pages/Services';
 import Project from './pages/Project';
@@ -13,9 +13,12 @@ import Login from './components/Login';
 import Dashboard from './pages/Dashboard';
 
 function App() {
+  const location = useLocation();
+  const isDashboard = location.pathname.toLowerCase() === '/dashboard';
+
   return (
     <div>
-      <Navbar />
+      {!isDashboard && <Navbar />}
       <Routes>
         <Route path="/" element={<Maincontainer />} />
         <Route path="/About" element={<About />} />
@@ -31,8 +34,8 @@ function App() {
         <Route path="/admin-login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-      <Footer />
-      <FloatingWhatsApp />
+      {!isDashboard && <Footer />}
+      {!isDashboard && <FloatingWhatsApp />}
     </div>
   );
 }
