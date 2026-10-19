@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './about.css';
+import nizam from '../assets/nizam.jpg'
 
 const statsData = [
     {
@@ -119,27 +120,15 @@ const processSteps = [
 ];
 
 const teamMembers = [
-    {
-        name: "Imamuddin",
-        role: "Chairman & Founder",
-        title: "Strategic Vision & Governance",
-        bio: "Guiding landmark residential and commercial developments with an uncompromising focus on structural integrity and transparency.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
-    },
+
     {
         name: "Nizamuddin",
         role: "Chief Executive Officer",
         title: "Executive Leadership & Operations",
         bio: "Directs turnkey project execution, engineering innovation, client relationships, and sustainable growth at Sufi Construction.",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-        name: "Jhon",
-        role: "General Manager",
-        title: "Project Execution & Quality Control",
-        bio: "Oversees site operations, structural auditing, contractor coordination, and on-schedule handovers.",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"
+        image: nizam
     }
+
 ];
 
 const About = () => {
