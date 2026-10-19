@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import API_URL from '../config/api';
+import { resolveImageUrl } from '../components/ImageDeviceUploader';
 import './project.css';
 import {
     RiSearchLine,
@@ -252,9 +255,22 @@ const processSteps = [
 ];
 
 const Project = () => {
+    const [projects, setProjects] = useState(projectsData);
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedProject, setSelectedProject] = useState(null);
+
+    useEffect(() => {
+        axios.get(`${API_URL}/api/projects`)
+            .then(res => {
+                if (res.data && res.data.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
+                    setProjects(res.data.data);
+                }
+            })
+            .catch(err => {
+                console.log("Using static projectsData fallback:", err);
+            });
+    }, []);
 
     // Close modal on Escape key press
     useEffect(() => {
@@ -268,25 +284,25 @@ const Project = () => {
     }, []);
 
     // Filter projects based on category and search query
-    const filteredProjects = projectsData.filter((project) => {
+    const filteredProjects = projects.filter((project) => {
         const matchesCategory =
-            selectedCategory === "All" || project.category === selectedCategory;
+            selectedCategory === "All" || project.category?.toLowerCase() === selectedCategory.toLowerCase();
 
         const query = searchQuery.trim().toLowerCase();
         const matchesSearch =
             !query ||
-            project.title.toLowerCase().includes(query) ||
-            project.location.toLowerCase().includes(query) ||
-            project.category.toLowerCase().includes(query) ||
-            project.shortDesc.toLowerCase().includes(query);
+            project.title?.toLowerCase().includes(query) ||
+            project.location?.toLowerCase().includes(query) ||
+            project.category?.toLowerCase().includes(query) ||
+            project.shortDesc?.toLowerCase().includes(query);
 
         return matchesCategory && matchesSearch;
     });
 
     // Helper count for tabs
     const getCategoryCount = (catValue) => {
-        if (catValue === "All") return projectsData.length;
-        return projectsData.filter((p) => p.category === catValue).length;
+        if (catValue === "All") return projects.length;
+        return projects.filter((p) => p.category?.toLowerCase() === catValue.toLowerCase()).length;
     };
 
     return (
@@ -357,7 +373,7 @@ const Project = () => {
 
                         {/* Results Count */}
                         <div className="project-results-count">
-                            Showing <strong>{filteredProjects.length}</strong> of {projectsData.length} Projects
+                            Showing <strong>{filteredProjects.length}</strong> of {projects.length} Projects
                         </div>
                     </div>
 
@@ -383,8 +399,8 @@ const Project = () => {
             <section className="projects-grid-section">
                 <div className="projects-grid">
                     {filteredProjects.length > 0 ? (
-                        filteredProjects.map((project) => (
-                            <article key={project.id} className="project-card">
+                        filteredProjects.map((project, index) => (
+                            <article key={project._id || project.id || index} className="project-card">
                                 {/* Card Image */}
                                 <div
                                     className="project-card-image-wrapper"
@@ -395,7 +411,7 @@ const Project = () => {
                                     aria-label={`View details for ${project.title}`}
                                 >
                                     <img
-                                        src={project.image}
+                                        src={resolveImageUrl(project.image)}
                                         alt={project.title}
                                         className="project-card-img"
                                         loading="lazy"
@@ -516,7 +532,7 @@ const Project = () => {
                         {/* Modal Header Image */}
                         <div className="project-modal-image-wrap">
                             <img
-                                src={selectedProject.image}
+                                src={resolveImageUrl(selectedProject.image)}
                                 alt={selectedProject.title}
                                 className="project-modal-img"
                             />

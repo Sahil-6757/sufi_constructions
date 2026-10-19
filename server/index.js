@@ -3,14 +3,53 @@ const app = express();
 const port = 5000;
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
 const mongoModel = require("./Controller/MongoSchema");
 const Project = require("./Controller/ProjectSchema");
 const Testimonial = require("./Controller/TestimonialSchema");
 const dotenv = require("dotenv");
 dotenv.config();
-app.use(cors());
-app.use(express.json());
 
+app.use(cors());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+
+// Configure static directory for uploaded custom images
+const uploadsDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use("/uploads", express.static(uploadsDir));
+
+// Multer Storage for device image uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, uploadsDir);
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+        const safeOriginalName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, "_");
+        const ext = path.extname(safeOriginalName).toLowerCase() || ".jpg";
+        cb(null, `img-${uniqueSuffix}${ext}`);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 25 * 1024 * 1024 }, // 25MB max file size
+    fileFilter: (req, file, cb) => {
+        const allowedExts = /\.(jpg|jpeg|png|webp|gif|svg)$/i;
+        const isExtValid = allowedExts.test(path.extname(file.originalname).toLowerCase());
+        const isMimeValid = file.mimetype && file.mimetype.startsWith("image/");
+        if (isExtValid || isMimeValid) {
+            cb(null, true);
+        } else {
+            cb(new Error("Only image files (JPG, PNG, WEBP, GIF, SVG) are allowed!"), false);
+        }
+    }
+});
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
@@ -20,9 +59,38 @@ mongoose.connect(process.env.MONGO_URI)
         console.log(err);
     });
 
-
 app.get("/api", (req, res) => {
     res.send("Hello World!");
+});
+
+// Image Upload Endpoint (from user device)
+app.post("/api/upload", (req, res) => {
+    upload.single("image")(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            console.error("Multer error:", err);
+            return res.status(400).json({ success: false, message: `Upload error: ${err.message}` });
+        } else if (err) {
+            console.error("Upload file filter error:", err);
+            return res.status(400).json({ success: false, message: err.message });
+        }
+
+        if (!req.file) {
+            return res.status(400).json({ success: false, message: "No image file provided in request." });
+        }
+
+        const relativeUrl = `/uploads/${req.file.filename}`;
+        const fullUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+
+        res.status(200).json({
+            success: true,
+            message: "Image uploaded successfully from device",
+            url: fullUrl,
+            relativeUrl: relativeUrl,
+            filename: req.file.filename,
+            size: req.file.size,
+            mimetype: req.file.mimetype
+        });
+    });
 });
 
 app.post("/auth/register", async (req, res) => {

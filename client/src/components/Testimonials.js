@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
+import axios from 'axios';
+import API_URL from '../config/api';
+import { resolveImageUrl } from './ImageDeviceUploader';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -56,6 +59,20 @@ const testimonialsData = [
 ];
 
 const Testimonials = () => {
+    const [testimonials, setTestimonials] = useState(testimonialsData);
+
+    useEffect(() => {
+        axios.get(`${API_URL}/api/testimonials`)
+            .then(res => {
+                if (res.data && res.data.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
+                    setTestimonials(res.data.data);
+                }
+            })
+            .catch(err => {
+                console.log("Using static testimonials fallback:", err);
+            });
+    }, []);
+
     return (
         <section className="testimonials-section" id="testimonials">
             <div className="testimonials-container">
@@ -79,7 +96,7 @@ const Testimonials = () => {
                         modifier: 1,
                         slideShadows: false,
                     }}
-                    loop={true}
+                    loop={testimonials.length > 2}
                     autoplay={{
                         delay: 4000,
                         disableOnInteraction: false,
@@ -88,24 +105,24 @@ const Testimonials = () => {
                     modules={[EffectCoverflow, Pagination, Autoplay]}
                     className="testimonials-swiper"
                 >
-                    {testimonialsData.map((item) => (
-                        <SwiperSlide key={item.id}>
+                    {testimonials.map((item, index) => (
+                        <SwiperSlide key={item._id || item.id || index}>
                             <div className="testimonial-card">
                                 <div className="testimonial-quote-icon">“</div>
                                 <div className="testimonial-stars">
-                                    {'★'.repeat(item.rating)}
+                                    {'★'.repeat(Math.max(1, Math.min(5, Number(item.rating) || 5)))}
                                 </div>
                                 <p className="testimonial-text">"{item.text}"</p>
                                 <div className="testimonial-user">
                                     <img
-                                        src={item.avatar}
+                                        src={resolveImageUrl(item.avatar) || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80'}
                                         alt={item.name}
                                         className="testimonial-avatar"
                                     />
                                     <div className="testimonial-user-info">
                                         <h4 className="testimonial-name">{item.name}</h4>
                                         <span className="testimonial-role">{item.role}</span>
-                                        <span className="testimonial-project">{item.project}</span>
+                                        {item.project && <span className="testimonial-project">{item.project}</span>}
                                     </div>
                                 </div>
                             </div>
