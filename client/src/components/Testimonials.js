@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import axios from 'axios';
 import API_URL from '../config/api';
 import { resolveImageUrl } from './ImageDeviceUploader';
-
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -96,7 +95,6 @@ const Testimonials = () => {
                         modifier: 1,
                         slideShadows: false,
                     }}
-                    loop={testimonials.length > 2}
                     autoplay={{
                         delay: 4000,
                         disableOnInteraction: false,
