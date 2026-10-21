@@ -10,11 +10,21 @@ const mongoModel = require("./Controller/MongoSchema");
 const Project = require("./Controller/ProjectSchema");
 const Testimonial = require("./Controller/TestimonialSchema");
 const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken")
 dotenv.config();
 
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+
+
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 24 * 60 * 60 * 1000,
+};
 
 // Configure static directory for uploaded custom images
 const uploadsDir = path.join(__dirname, "uploads");
@@ -139,6 +149,9 @@ app.post("/auth/login", async (req, res) => {
         if (result) {
             console.log("LOGIN SUCCESS for user:", username);
             res.status(200).json({ success: true, message: "Login successful", result });
+
+            const token = jwt.sign()
+
         } else {
             res.status(401).json({ success: false, message: "Invalid username or password" });
         }
