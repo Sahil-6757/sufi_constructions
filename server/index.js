@@ -150,7 +150,6 @@ app.post("/auth/login", async (req, res) => {
             console.log("LOGIN SUCCESS for user:", username);
             res.status(200).json({ success: true, message: "Login successful", result });
 
-            const token = jwt.sign()
 
         } else {
             res.status(401).json({ success: false, message: "Invalid username or password" });
