@@ -2,28 +2,35 @@ const express = require("express");
 const app = express();
 const port = 5000;
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
+
 const mongoModel = require("./Controller/MongoSchema");
 const Project = require("./Controller/ProjectSchema");
 const Testimonial = require("./Controller/TestimonialSchema");
-const dotenv = require("dotenv");
-const jwt = require("jsonwebtoken")
-dotenv.config();
+const authMiddleware = require("./Middleware/authMiddleware");
 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
+app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-
 
 const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 // Configure static directory for uploaded custom images
@@ -73,8 +80,8 @@ app.get("/api", (req, res) => {
     res.send("Hello World!");
 });
 
-// Image Upload Endpoint (from user device)
-app.post("/api/upload", (req, res) => {
+// Image Upload Endpoint (from user device - protected)
+app.post("/api/upload", authMiddleware, (req, res) => {
     upload.single("image")(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             console.error("Multer error:", err);
@@ -106,28 +113,47 @@ app.post("/api/upload", (req, res) => {
 app.post("/auth/register", async (req, res) => {
     try {
         const { username, name, email, password } = req.body || {};
-        const userEmail = email || username;
-        const userName = name || username;
+        const userEmail = (email || username || "").trim().toLowerCase();
+        const userName = (name || username || "").trim();
 
         if (!userEmail || !password) {
             return res.status(400).json({ success: false, message: "Please enter your username/email and password" });
         }
 
         const existingUser = await mongoModel.findOne({
-            $or: [{ email: userEmail }, { name: userName }]
+            $or: [
+                { email: { $regex: new RegExp(`^${userEmail}$`, "i") } },
+                { name: { $regex: new RegExp(`^${userName}$`, "i") } }
+            ]
         });
 
         if (existingUser) {
             return res.status(400).json({ success: false, message: "User already exists with this username/email" });
         }
 
+        const hashedPassword = await bcrypt.hash(password, 10);
         const user = new mongoModel({
             name: userName,
             email: userEmail,
-            password: password
+            password: hashedPassword
         });
         await user.save();
-        res.status(201).json({ success: true, message: "User registered successfully", user });
+
+        const jwtSecret = process.env.JWT_SECRET || "sufi_construction_jwt_secret_key_2024";
+        const token = jwt.sign(
+            { id: user._id, email: user.email, name: user.name },
+            jwtSecret,
+            { expiresIn: "7d" }
+        );
+
+        res.cookie("token", token, cookieOptions);
+
+        res.status(201).json({
+            success: true,
+            message: "User registered successfully",
+            token,
+            user: { id: user._id, name: user.name, email: user.email }
+        });
     } catch (err) {
         console.error("Register error:", err);
         res.status(500).json({ success: false, error: err.message });
@@ -137,27 +163,92 @@ app.post("/auth/register", async (req, res) => {
 app.post("/auth/login", async (req, res) => {
     try {
         const { username, password } = req.body || {};
-        if (!username || !password) {
-            return res.status(400).json({ success: false, message: "Please enter your username and password" });
+        const userIdentifier = (username || req.body.email || "").trim();
+        const userPassword = password || req.body.pass || "";
+
+        if (!userIdentifier || !userPassword) {
+            return res.status(400).json({ success: false, message: "Please enter your username/email and password" });
         }
 
-        const result = await mongoModel.findOne({
-            $or: [{ email: username }, { name: username }],
-            password: password
+        const user = await mongoModel.findOne({
+            $or: [
+                { email: { $regex: new RegExp(`^${userIdentifier}$`, "i") } },
+                { name: { $regex: new RegExp(`^${userIdentifier}$`, "i") } }
+            ]
         });
 
-        if (result) {
-            console.log("LOGIN SUCCESS for user:", username);
-            res.status(200).json({ success: true, message: "Login successful", result });
-
-
-        } else {
-            res.status(401).json({ success: false, message: "Invalid username or password" });
+        if (!user) {
+            return res.status(401).json({ success: false, message: "Invalid credentials: user not found" });
         }
+
+        let isMatch = false;
+        if (user.password && (user.password.startsWith("$2a$") || user.password.startsWith("$2b$"))) {
+            isMatch = await bcrypt.compare(userPassword, user.password);
+        } else {
+            // Legacy plain text check with auto-upgrade
+            isMatch = (user.password === userPassword);
+            if (isMatch) {
+                try {
+                    const hashed = await bcrypt.hash(userPassword, 10);
+                    user.password = hashed;
+                    await user.save();
+                } catch (hashErr) {
+                    console.error("Password upgrade warning:", hashErr);
+                }
+            }
+        }
+
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message: "Invalid username or password" });
+        }
+
+        const jwtSecret = process.env.JWT_SECRET || "sufi_construction_jwt_secret_key_2024";
+        const token = jwt.sign(
+            { id: user._id, email: user.email, name: user.name },
+            jwtSecret,
+            { expiresIn: "7d" }
+        );
+
+        res.cookie("token", token, cookieOptions);
+
+        return res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
     } catch (err) {
         console.error("Login error:", err);
         res.status(500).json({ success: false, error: err.message });
     }
+});
+
+// Verify token / get current user endpoint
+app.get("/auth/me", authMiddleware, async (req, res) => {
+    try {
+        res.status(200).json({
+            success: true,
+            message: "User authenticated",
+            user: {
+                id: req.user._id,
+                name: req.user.name,
+                email: req.user.email
+            }
+        });
+    } catch (err) {
+        console.error("Auth check error:", err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+// Logout endpoint
+app.post("/auth/logout", (req, res) => {
+    res.clearCookie("token", { path: "/" });
+    res.status(200).json({ success: true, message: "Logged out successfully" });
 });
 
 // Fallback GET route to prevent crashes if visited in browser
@@ -206,8 +297,8 @@ app.get("/api/projects/:id", async (req, res) => {
     }
 });
 
-// POST create new project
-app.post("/api/projects", async (req, res) => {
+// POST create new project (protected)
+app.post("/api/projects", authMiddleware, async (req, res) => {
     try {
         const {
             title, category, location, area, year, status,
@@ -249,8 +340,8 @@ app.post("/api/projects", async (req, res) => {
     }
 });
 
-// PUT update project
-app.put("/api/projects/:id", async (req, res) => {
+// PUT update project (protected)
+app.put("/api/projects/:id", authMiddleware, async (req, res) => {
     try {
         const updateData = { ...req.body };
         if (typeof updateData.highlights === "string") {
@@ -271,8 +362,8 @@ app.put("/api/projects/:id", async (req, res) => {
     }
 });
 
-// DELETE project
-app.delete("/api/projects/:id", async (req, res) => {
+// DELETE project (protected)
+app.delete("/api/projects/:id", authMiddleware, async (req, res) => {
     try {
         const deletedProject = await Project.findByIdAndDelete(req.params.id);
         if (!deletedProject) {
@@ -314,8 +405,8 @@ app.get("/api/testimonials/:id", async (req, res) => {
     }
 });
 
-// POST create new testimonial
-app.post("/api/testimonials", async (req, res) => {
+// POST create new testimonial (protected)
+app.post("/api/testimonials", authMiddleware, async (req, res) => {
     try {
         const { name, role, project, avatar, text, rating } = req.body;
         if (!name || !name.trim()) {
@@ -342,8 +433,8 @@ app.post("/api/testimonials", async (req, res) => {
     }
 });
 
-// PUT update testimonial
-app.put("/api/testimonials/:id", async (req, res) => {
+// PUT update testimonial (protected)
+app.put("/api/testimonials/:id", authMiddleware, async (req, res) => {
     try {
         const updateData = { ...req.body };
         if (updateData.rating) {
@@ -364,8 +455,8 @@ app.put("/api/testimonials/:id", async (req, res) => {
     }
 });
 
-// DELETE testimonial
-app.delete("/api/testimonials/:id", async (req, res) => {
+// DELETE testimonial (protected)
+app.delete("/api/testimonials/:id", authMiddleware, async (req, res) => {
     try {
         const deletedTestimonial = await Testimonial.findByIdAndDelete(req.params.id);
         if (!deletedTestimonial) {

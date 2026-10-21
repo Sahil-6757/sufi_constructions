@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import API_URL from '../config/api';
+import API_URL, { getStoredUser, clearAuthData } from '../config/api';
 import './dashboard.css';
 import Logo from '../assets/Logo.png';
 import ImageDeviceUploader, { resolveImageUrl } from '../components/ImageDeviceUploader';
@@ -108,6 +108,7 @@ const initialTestimonialForm = {
 
 const Dashboard = () => {
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(() => getStoredUser());
     const [activeTab, setActiveTab] = useState('projects'); // 'overview' | 'projects' | 'testimonial'
 
     // Data lists
@@ -399,9 +400,16 @@ const Dashboard = () => {
         }
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         if (window.confirm("Are you sure you want to log out of Sufi Admin Portal?")) {
-            navigate('/admin-login');
+            try {
+                await axios.post(`${API_URL}/auth/logout`);
+            } catch (err) {
+                // Ignore logout network error
+            } finally {
+                clearAuthData();
+                navigate('/admin-login', { replace: true });
+            }
         }
     };
 
@@ -462,9 +470,16 @@ const Dashboard = () => {
                         </li>
                     </ul>
 
-
-
                     <div className="sidebar-footer">
+                        <div className="admin-profile-pill">
+                            <div className="admin-avatar">
+                                {(currentUser?.name || 'A')[0].toUpperCase()}
+                            </div>
+                            <div className="admin-info">
+                                <span className="admin-title">{currentUser?.name || 'Administrator'}</span>
+                                <span className="admin-status-dot">Online</span>
+                            </div>
+                        </div>
 
                         <button className="logout-btn" onClick={handleLogout} title="Logout">
                             <RiLogoutBoxRLine size={18} />
@@ -490,6 +505,16 @@ const Dashboard = () => {
                             </p>
                         </div>
 
+                        <div className="top-bar-right">
+                            <div className="server-status-badge">
+                                <span className="admin-status-dot">JWT Active</span>
+                                <span>{currentUser?.email || currentUser?.name || 'Admin'}</span>
+                            </div>
+                            <button className="logout-btn" onClick={handleLogout} title="Sign out" style={{ padding: '6px 12px', fontSize: '12px' }}>
+                                <RiLogoutBoxRLine size={15} />
+                                <span>Logout</span>
+                            </button>
+                        </div>
                     </header>
 
                     {/* Quick Metric Cards (Visible on Overview and helpful) */}

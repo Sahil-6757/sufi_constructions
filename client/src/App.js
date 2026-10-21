@@ -1,3 +1,4 @@
+import './config/api';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,6 +12,7 @@ import Contact from './pages/Contact';
 import Package from './pages/Package';
 import Login from './components/Login';
 import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const location = useLocation();
@@ -32,7 +34,14 @@ function App() {
         <Route path="/Package" element={<Package />} />
         <Route path="/package" element={<Package />} />
         <Route path="/admin-login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       {!isDashboard && <Footer />}
       {!isDashboard && <FloatingWhatsApp />}

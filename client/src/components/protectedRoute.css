@@ -1,0 +1,76 @@
+.auth-verification-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 30%, #1e2430 0%, #0f131a 100%);
+    color: #f1f5f9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 20px;
+}
+
+.auth-verification-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(234, 161, 102, 0.2);
+    border-radius: 16px;
+    padding: 40px 50px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(234, 161, 102, 0.08);
+    backdrop-filter: blur(10px);
+    max-width: 440px;
+    width: 100%;
+}
+
+.auth-logo-pulse {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 4px 12px rgba(234, 161, 102, 0.3));
+    animation: logoGlow 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    from {
+        transform: scale(1);
+        filter: drop-shadow(0 4px 12px rgba(234, 161, 102, 0.2));
+    }
+    to {
+        transform: scale(1.05);
+        filter: drop-shadow(0 6px 20px rgba(234, 161, 102, 0.5));
+    }
+}
+
+.auth-spinner-ring {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(234, 161, 102, 0.15);
+    border-top: 3px solid #eaa166;
+    border-right: 3px solid #dbca7d;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    animation: authSpin 0.9s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+}
+
+@keyframes authSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.auth-verifying-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.auth-verifying-sub {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+}
