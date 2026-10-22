@@ -505,7 +505,7 @@ const Dashboard = () => {
                             </p>
                         </div>
 
-                        <div className="top-bar-right">
+                        {/* <div className="top-bar-right">
                             <div className="server-status-badge">
                                 <span className="admin-status-dot">JWT Active</span>
                                 <span>{currentUser?.email || currentUser?.name || 'Admin'}</span>
@@ -514,7 +514,7 @@ const Dashboard = () => {
                                 <RiLogoutBoxRLine size={15} />
                                 <span>Logout</span>
                             </button>
-                        </div>
+                        </div> */}
                     </header>
 
                     {/* Quick Metric Cards (Visible on Overview and helpful) */}
