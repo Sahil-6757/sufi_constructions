@@ -9,7 +9,6 @@ import {
     RiLockPasswordLine,
     RiEyeLine,
     RiEyeOffLine,
-    RiShieldCheckLine,
     RiErrorWarningLine,
     RiArrowRightLine
 } from 'react-icons/ri';
@@ -40,14 +39,14 @@ const Login = () => {
             axios.get(`${API_URL}/auth/me`, {
                 headers: { Authorization: `Bearer ${existingToken}` }
             })
-            .then(res => {
-                if (res.data?.success) {
-                    navigate('/dashboard', { replace: true });
-                }
-            })
-            .catch(() => {
-                // Token invalid, remain on login page
-            });
+                .then(res => {
+                    if (res.data?.success) {
+                        navigate('/dashboard', { replace: true });
+                    }
+                })
+                .catch(() => {
+                    // Token invalid, remain on login page
+                });
         }
     }, [location, navigate]);
 
@@ -96,10 +95,7 @@ const Login = () => {
                     <img src={logo} alt="Sufi Construction Logo" className="login-brand-logo" />
                     <h2 className="login-brand-title">SUFI CONSTRUCTION</h2>
                     <p className="login-brand-tagline">Excellence in Civil & Architectural Engineering</p>
-                    <div className="login-security-badge">
-                        <RiShieldCheckLine size={18} />
-                        <span>256-Bit Encrypted JWT Authentication</span>
-                    </div>
+
                 </div>
 
                 {/* Right form panel */}
